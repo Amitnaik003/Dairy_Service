@@ -1,0 +1,20 @@
+services:
+  dairy-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8080"
+    environment:
+      # We commented this out so your appsettings.json link takes priority!
+      # - MongoDb__ConnectionString=mongodb://dairy-db:27017
+      - MongoDb__DatabaseName=DairyDB
+    depends_on:
+      - dairy-db
+
+  dairy-db:
+    image: mongo:latest
+    ports:
+      - "27018:27017"
+    volumes:
+      - ./Mongo-init/init.js:/docker-entrypoint-initdb.d/init.js:ro
