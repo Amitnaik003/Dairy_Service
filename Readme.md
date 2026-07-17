@@ -6,10 +6,6 @@ Think of your entire project as a highly organized Restaurant.
 
 ---
 
-## The 4-Tier Architecture
-
-When you ask for a "strict 4-tier architecture", you are asking to separate your code into 4 distinct "Class Libraries" (folders). We do this so that the code doesn't become one giant, messy file. Every folder has a very strict job, and they are only allowed to talk to specific people.
-
 ### 1. `Dairy.DMO` (Data Model Objects) 🍅
 **Analogy:** The Raw Ingredients.
 - **What it does:** This folder just holds simple definitions of what your data looks like *exactly* as it is stored in the database.
