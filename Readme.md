@@ -1,4 +1,4 @@
-# 🏗️ The Dairy-Service Project Guide (E10 Level)
+# 🏗️ The Dairy-Service Project Guide
 
 Welcome! Building a whole backend system with Docker and APIs can seem like magic at first. To understand exactly what I built for you, we are going to use a **Restaurant Analogy**. 
 
