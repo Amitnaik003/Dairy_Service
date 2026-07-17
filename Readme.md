@@ -1,6 +1,6 @@
 # 🏗️ The Dairy-Service Project Guide
 
-Welcome! Building a whole backend system with Docker and APIs can seem like magic at first. To understand exactly what I built for you, we are going to use a **Restaurant Analogy**. 
+Welcome! Building a whole backend system with Docker and APIs can seem like magic at first. To understand exactly we are going to use a **Restaurant Analogy**. 
 
 Think of your entire project as a highly organized Restaurant.
 
