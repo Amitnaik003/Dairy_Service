@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dairy.Context\Dairy.Context.csproj" />
+    <ProjectReference Include="..\Dairy.DMO\Dairy.DMO.csproj" />
     <ProjectReference Include="..\Dairy.DTO\Dairy.DTO.csproj" />
   </ItemGroup>
 </Project>

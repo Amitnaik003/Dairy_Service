@@ -14,19 +14,19 @@ When you ask for a "strict 4-tier architecture", you are asking to separate your
 **Analogy:** The Raw Ingredients.
 - **What it does:** This folder just holds simple definitions of what your data looks like *exactly* as it is stored in the database.
 - **The Code:** `DairyProduct.cs` and `User.cs`. They just list properties like `Name`, `FatContent`, and `StockQuantity`.
-- **Rules:** It doesn't know about any other folders. It just exists to define shapes.
+- **Rules:** It doesn't know about any other folders. It just exists to define shapes. **Relationship:** One to One with serv hib.
 
 ### 2. `Dairy.Context` (Data Access Layer) 👨‍🍳
 **Analogy:** The Chef in the Kitchen.
 - **What it does:** This is the ONLY folder that is allowed to talk to the Database (MongoDB). 
 - **The Code:** `DairyRepository.cs` and `UserRepository.cs`. 
-- **Rules:** If anyone wants to save a new product or look up a user, they *must* ask the `Dairy.Context`. The Context reaches into the database, grabs the raw ingredients (`DMO`), and passes them back.
+- **Rules:** If anyone wants to save a new product or look up a user, they *must* ask the `Dairy.Context`. The Context reaches into the database, grabs the raw ingredients (`DMO`), and passes them back. **Relationship:** One to One with serv hib.
 
 ### 3. `Dairy.DTO` (Data Transfer Objects) 🍽️
 **Analogy:** The Plated Meal.
 - **What it does:** When a customer orders food, you don't bring them a raw egg and flour. You bring them a baked cake. The DTO defines what the data looks like *after* we prepare it for the outside world.
 - **The Code:** `DairyProductResponse.cs`.
-- **Rules:** Notice how we have an Admin DTO and a User DTO? That's because if an Admin asks for data, we give them a plate with everything (including `StockQuantity`). If a normal User asks, we give them a smaller plate that hides the stock and temperatures.
+- **Rules:** Notice how we have an Admin DTO and a User DTO? That's because if an Admin asks for data, we give them a plate with everything (including `StockQuantity`). If a normal User asks, we give them a smaller plate that hides the stock and temperatures. **Relationship:** One to Many.
 
 ### 4. `Dairy.ServiceHub` (The Core Web API) 🤵
 **Analogy:** The Waiter & The Front Doors.
