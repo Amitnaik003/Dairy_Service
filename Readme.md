@@ -1,6 +1,5 @@
-   # 🏗️ The Dairy-Service Project Guide (E10 Level)
+   # 🏗️ The Dairy-Service Project Guide
 
-   Welcome! Building a whole backend system with Docker and APIs can seem like magic at first. To understand exactly what I built for you, we are going to use a **Restaurant Analogy**. 
 
    Think of your entire project as a highly organized Restaurant.
 
@@ -8,7 +7,7 @@
 
    ## The 4-Tier Architecture
 
-   When you ask for a "strict 4-tier architecture", you are asking to separate your code into 4 distinct "Class Libraries" (folders). We do this so that the code doesn't become one giant, messy file. Every folder has a very strict job, and they are only allowed to talk to specific people.
+   When you ask for a "strict 4-tier architecture", Every folder has a very strict job, and they are only allowed to talk to specific people.
 
    ### 1. `Dairy.DMO` (Data Model Objects) 🍅
    **Analogy:** The Raw Ingredients.
