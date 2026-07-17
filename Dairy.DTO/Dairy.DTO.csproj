@@ -8,4 +8,8 @@
     <PackageReference Include="MongoDB.Bson" Version="3.10.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.10.0" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dairy.Context\Dairy.Context.csproj" />
+    <ProjectReference Include="..\Dairy.DMO\Dairy.DMO.csproj" />
+  </ItemGroup>
 </Project>
