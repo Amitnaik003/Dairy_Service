@@ -1,9 +1,5 @@
-<<<<<<< HEAD
-   # 🏗️ The Dairy-Service Project Guide
+  # 🏗️ The Dairy-Service Project Guide 
 
-=======
-   # 🏗️ The Dairy-Service Project Guide 
->>>>>>> 794ee25c0e89da8fcb07b982873e407c38df4d95
 
    Think of your entire project as a highly organized Restaurant.
 
