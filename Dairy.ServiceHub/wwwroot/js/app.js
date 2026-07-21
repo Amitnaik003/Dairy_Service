@@ -7,7 +7,7 @@ if (loginForm) {
         e.preventDefault();
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
-        
+
         try {
             const res = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
@@ -19,6 +19,7 @@ if (loginForm) {
                 const data = await res.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('role', data.role);
+                localStorage.setItem('username', data.username);
                 window.location.href = '/dashboard.html';
             } else {
                 document.getElementById('errorMsg').innerText = 'Invalid credentials';
@@ -33,13 +34,20 @@ if (loginForm) {
 async function loadDashboard() {
     const token = localStorage.getItem('token');
     const role = localStorage.getItem('role');
-    
+    const username = localStorage.getItem('username');
+
     if (!token) {
         window.location.href = '/index.html';
         return;
     }
 
     document.getElementById('userRoleBadge').innerText = role;
+
+    // Display Username
+    const nameDisplay = document.getElementById('userNameDisplay');
+    if (nameDisplay && username) {
+        nameDisplay.innerText = `Welcome, ${username}`;
+    }
 
     // Logout
     document.getElementById('logoutBtn').addEventListener('click', () => {
@@ -81,7 +89,7 @@ async function loadDashboard() {
         document.getElementById('cancelBtn').addEventListener('click', () => {
             document.getElementById('addProductModal').classList.add('hidden');
         });
-        
+
         document.getElementById('saveProductBtn').addEventListener('click', async () => {
             const payload = {
                 name: document.getElementById('pName').value,
@@ -89,16 +97,16 @@ async function loadDashboard() {
                 storageTemperatureRange: document.getElementById('pTemp').value,
                 stockQuantity: parseInt(document.getElementById('pStock').value)
             };
-            
+
             await fetch(`${API_URL}/dairy/products`, {
                 method: 'POST',
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(payload)
             });
-            
+
             document.getElementById('addProductModal').classList.add('hidden');
             await fetchProducts(token, isAdmin);
         });
@@ -109,7 +117,7 @@ async function fetchProducts(token, isAdmin) {
     const res = await fetch(`${API_URL}/dairy/products`, {
         headers: { 'Authorization': `Bearer ${token}` }
     });
-    
+
     if (res.status === 401) {
         window.location.href = '/index.html';
         return;

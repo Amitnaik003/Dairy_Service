@@ -18,8 +18,21 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration["MongoDb:ConnectionString"] ?? "mongodb://localhost:27018";
 var databaseName = builder.Configuration["MongoDb:DatabaseName"] ?? "DairyDB";
 
-builder.Services.AddSingleton(new DairyRepository(connectionString, databaseName));
-builder.Services.AddSingleton(new UserRepository(connectionString, databaseName));
+Console.WriteLine("====================================================");
+Console.WriteLine($"[STARTUP] Using MongoDB Connection: {connectionString}");
+Console.WriteLine($"[STARTUP] Using Database Name: {databaseName}");
+Console.WriteLine("====================================================");
+
+try 
+{
+    builder.Services.AddSingleton(new DairyRepository(connectionString, databaseName));
+    builder.Services.AddSingleton(new UserRepository(connectionString, databaseName));
+    Console.WriteLine("[STARTUP] Successfully connected to MongoDB and seeded collections!");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"[FATAL ERROR] Could not connect to MongoDB. Is your IP whitelisted in Atlas? Error: {ex.Message}");
+}
 
 // JWT Authentication
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "ThisIsAVerySecretKeyForJwtAuthenticationWhichNeedsToBeLongEnough";
@@ -43,10 +56,20 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularDev",
+        builder => builder.WithOrigins("http://localhost:4200")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.UseCors("AllowAngularDev");
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -71,7 +94,7 @@ app.MapPost("/api/auth/login", async (LoginRequest request, UserRepository userR
     };
 
     var token = tokenHandler.CreateToken(tokenDescriptor);
-    return Results.Ok(new AuthResponse { Token = tokenHandler.WriteToken(token), Role = user.Role });
+    return Results.Ok(new AuthResponse { Token = tokenHandler.WriteToken(token), Role = user.Role, Username = user.Username });
 });
 
 // Get Products (Accessible by both Admin and User, but returns different fields)

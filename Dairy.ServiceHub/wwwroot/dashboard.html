@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,17 +8,21 @@
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
+
 <body class="dashboard-body">
     <nav class="glass-nav">
         <div class="logo">DairyHub <span id="userRoleBadge" class="badge"></span></div>
-        <button id="logoutBtn" class="btn-secondary">Logout</button>
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <span id="userNameDisplay" style="color: white; font-weight: 600;"></span>
+            <button id="logoutBtn" class="btn-secondary">Logout</button>
+        </div>
     </nav>
     <main class="container">
         <div class="header-action">
             <h2>Product Inventory</h2>
             <button id="addBtn" class="btn-primary hidden">Add New Product</button>
         </div>
-        
+
         <!-- Add Product Form Modal -->
         <div id="addProductModal" class="glass-container hidden">
             <h3>Add Product</h3>
@@ -49,4 +54,5 @@
         document.addEventListener('DOMContentLoaded', loadDashboard);
     </script>
 </body>
+
 </html>

@@ -16,7 +16,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://+:8080
-# Override the connection string for Docker Compose networking
-ENV MongoDb__ConnectionString=mongodb://dairy-db:27017
+# Using remote Atlas connection string from appsettings.json
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Dairy.ServiceHub.dll"]

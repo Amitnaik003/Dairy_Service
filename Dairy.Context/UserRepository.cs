@@ -23,7 +23,7 @@ namespace Dairy.Context
                 // Simple plain-text hashing for demonstration 
                 _users.InsertMany(new[]
                 {
-                    new User { Username = "admin", PasswordHash = "admin123", Role = "Admin" },
+                    new User { Username = "admin", PasswordHash = "admin@05", Role = "Admin" },
                     new User { Username = "user", PasswordHash = "user123", Role = "User" }
                 });
             }
